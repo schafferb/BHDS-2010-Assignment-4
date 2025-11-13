@@ -1,0 +1,85 @@
+---
+title: "Assignment 4 Bryanna"
+output: html_document
+---
+
+Loading packages
+
+```{r}
+library(readr)
+library(dplyr)
+library(pastecs)
+library(ggplot2)
+```
+
+Uploading/Editing Data set
+
+```{r}
+CHD <- read.table("https://hastie.su.domains/ElemStatLearn/datasets/SAheart.data",
+           sep=",",head=T,row.names=1)
+
+CHD <- CHD %>%
+  mutate(chd = factor(chd,
+                      levels = c(0, 1),
+                      labels = c("No CHD", "CHD")))
+
+is.factor(CHD$chd) # double check factor 
+
+CHD$famhist <- as.factor(CHD$famhist)
+
+is.factor(CHD$famhist)
+
+write.csv(CHD, "CHD", row.names = FALSE)
+```
+
+Data Exploration
+
+```{r}
+by(CHD$sbp, CHD$chd, 
+   function(x) round(stat.desc(x), 2))
+
+by(CHD$tobacco, CHD$chd, 
+   function(x) round(stat.desc(x), 2))
+
+by(CHD$ldl, CHD$chd, 
+   function(x) round(stat.desc(x), 2))
+
+prop.table(table(CHD$chd, CHD$famhist), margin = 2)
+```
+
+Graphs
+
+```{r}
+ggplot(CHD, aes(x = chd, y = sbp, fill = factor(chd))) +
+  geom_boxplot() +
+  labs(title = "SBP by CHD",
+       x = "CHD",
+       y = "Systolic BP") +
+  theme_minimal()
+
+ggplot(CHD, aes(x = chd, y = tobacco, fill = factor(chd))) +
+  geom_boxplot() +
+  labs(title = "Tobacco Usage by CHD",
+       x = "CHD",
+       y = "Tobacco Usage") +
+  theme_minimal()
+
+ggplot(CHD, aes(x = chd, y = ldl, fill = factor(chd))) +
+  geom_boxplot() +
+  labs(title = "Low Density Lipoprotein Cholesterol Level by CHD",
+       x = "CHD",
+       y = "Low Density Lipoprotein Cholesterol Level") +
+  theme_minimal()
+
+ggplot(CHD, aes(x = famhist, fill = chd)) +
+  geom_bar(position = "fill") +   # Use 'fill' to show proportions
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(title = "Proportion of CHD by Family History",
+       x = "Family History",
+       y = "Proportion") +
+  theme_minimal()
+  
+```
+
+
+  
