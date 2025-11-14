@@ -19,3 +19,4 @@ Bryanna Schaffer and Ibrahim Elbasheer
 
 11/10/2025 - Dataset picked out and agreed uponed by Bryanna and Ibrahim
 
+11/14/2025 - Ibrahim accepted the invitation
