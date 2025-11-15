@@ -12,6 +12,7 @@ library(tidyverse)
 library(dplyr)
 library(ggplot2)
 library(ggthemes)
+library(bslib)
 
 
 # loading the data
@@ -36,23 +37,37 @@ is.factor(CHD$famhist) # double check factor
 
 # Define UI
 ui <- fluidPage(
-  theme = bs_theme(
-    bg = "white", 
-    fg = "black",
-    primary = "black",
-    secondary = "#0072B2",
-    success = "#009E73",
-    base_font = font_google("Verdana"),
-    code_font = font_google("Verdana")
-  ),
   br(), 
   fluidRow(titlePanel(strong("Risk Factors Associated with CHD Diagnosis in High-Risk South African Men")), align = "center"),
   fluidRow(h5("Published by: Bryanna Schaffer and Ibrahim Elbasheer"), align = "center"),
   tabsetPanel(
     tabPanel(strong("Data Overview"),
+             br(),
+             mainPanel(width = 12,
+                       h3(strong("Research Question"), align = "center"),
+                       textOutput("question"),
+                       br(),
+                       h3(strong("Data Overview"), align = "center"),
+                       textOutput("data"),
+                       br(),
+                       h4(strong("Variables of Interest"), align = "center"),
+                       textOutput("variables")
+                       )
              ),
     tabPanel(strong("Data Exploration"),
              ),
     tabPanel(strong("Data Analysis"))
   )
 )
+
+server <- function(input, output, session){
+  
+}
+
+# writing for data overview section 
+output$question <- renderText({
+  ""
+})
+
+# Run the application
+shinyApp(ui = ui, server = server)
