@@ -9,6 +9,7 @@ Bryanna Schaffer and Ibrahim Elbasheer
 # Dataset
 
 # Roles and Responsibilities
+To complete this assignment, we though it would be best if we split our variables of interest between the two of us. Bryanna is responsible for sbp, tobacco, ldl, and famhist. Ibrahim is responsible for typea, obesity, alcohol, and age. We both will perform data analysis and write a results section for each variable (total of 4 each)!
 
 # Files
 
