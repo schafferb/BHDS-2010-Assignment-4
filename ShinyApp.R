@@ -45,10 +45,10 @@ ui <- fluidPage(
              br(),
              mainPanel(width = 12,
                        h3(strong("Research Question"), align = "center"),
-                       textOutput("question"),
+                       h4(textOutput("question")),
                        br(),
                        h3(strong("Data Overview"), align = "center"),
-                       textOutput("data"),
+                       textOutput("overview"),
                        br(),
                        h4(strong("Variables of Interest"), align = "center"),
                        textOutput("variables")
@@ -66,7 +66,11 @@ server <- function(input, output, session){
 
 # writing for data overview section 
 output$question <- renderText({
-  ""
+  "Which risk factors are most strongly associated with CHD diagnosis in high-risk South African men?"
+})
+
+output$overview <- renderText({
+  
 })
 
 # Run the application
