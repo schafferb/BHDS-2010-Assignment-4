@@ -38,8 +38,9 @@ is.factor(CHD$famhist) # double check factor
 # Define UI
 ui <- fluidPage(
   br(), 
-  fluidRow(titlePanel(strong("Risk Factors Associated with CHD Diagnosis in High-Risk South African Men")), align = "center"),
-  fluidRow(h5("Published by: Bryanna Schaffer and Ibrahim Elbasheer"), align = "center"),
+  fluidRow(titlePanel(strong("Risk Factors Associated with CHD Diagnosis in 
+                             High-Risk South African Men")), align = "center"),
+  fluidRow(h4("Published by: Bryanna Schaffer and Ibrahim Elbasheer"), align = "center"),
   tabsetPanel(
     tabPanel(strong("Data Overview"),
              br(),
@@ -51,7 +52,7 @@ ui <- fluidPage(
                        textOutput("overview"),
                        br(),
                        h4(strong("Variables of Interest"), align = "center"),
-                       textOutput("variables")
+                       uiOutput("variables")
                        )
              ),
     tabPanel(strong("Data Exploration"),
@@ -61,17 +62,38 @@ ui <- fluidPage(
 )
 
 server <- function(input, output, session){
+  # writing for data overview section 
+  output$question <- renderText({
+    "Which risk factors are most strongly associated with CHD diagnosis in high-risk 
+    South African men?"
+  })
   
+  output$overview <- renderText({
+    "This dataset originates from  retrospective study of adult males living in a 
+    heart-diseases high-risk region of the Western Cape, South Africa. The sample 
+    includes individuals with diagnosed coronary heart disease (CHD) and a larger 
+    group of demographic factors. These data form part of a broader study described 
+    in Roussaeuw et al. (1983) in the South African Medical Journal. Several physiological measurements were recorded after treatment. This is an important consideration when interpreting predictors such as systolic blood pressure in relation to CHD status"
+  })
+  
+  output$variables <- renderUI({
+    tagList(
+      p("For this analysis, the following variables will be used:"),
+      tags$ul(
+        tags$li("sbp: systolic blood pressure"),
+        tags$li("tobacco: cumulative tobacco use (kg)"),
+        tags$li("ldl: low-density lipoprotein cholesterol"),
+        tags$li("adiposity: measure of body fat"),
+        tags$li("famhist: family history of heart disease (Present/Absent)"),
+        tags$li("obesity: obesity score or index"),
+        tags$li("alcohol: current alcohol consumption"),
+        tags$li("age: age at onset"),
+        tags$li("chd: coronary heart disease (Absent/Present)")
+      )
+    )
+  })
 }
 
-# writing for data overview section 
-output$question <- renderText({
-  "Which risk factors are most strongly associated with CHD diagnosis in high-risk South African men?"
-})
-
-output$overview <- renderText({
-  
-})
 
 # Run the application
 shinyApp(ui = ui, server = server)
