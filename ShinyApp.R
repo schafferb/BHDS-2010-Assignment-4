@@ -13,6 +13,7 @@ library(dplyr)
 library(ggplot2)
 library(ggthemes)
 library(bslib)
+library(DT)
 
 
 # loading the data
@@ -62,8 +63,10 @@ ui <- fluidPage(
                        textOutput("howtodata"),
                        br(),
                        
-                       # dropdown
-                       selectInput("independent", strong("Select a Variable of Interest"),
+                       # dropdown first
+                       fluidRow(
+                         column(6,
+                                selectInput("independent", strong("Select a Variable of Interest"),
                                    choices = c("Systolic Blood Pressure" = "sbp",
                                                "Tobacco" = "tobacco",
                                                "Low Density Lipoprotein Cholesterol" = "ldl",
@@ -73,21 +76,24 @@ ui <- fluidPage(
                                                "Alcohol Consumption" = "alcohol",
                                                "Age" = "age"),
                                    selected = "sbp"),
-                       
                        br(),
                        
-                       # table output
-                       strong(tableOutput("summaryTable"), align = "center")
-             ), tags$head(
-               tags$style(HTML("
-    #summaryTable table {
-      font-size: 22px;
-    }
-    #summaryTable th, #summaryTable td {
-      padding: 12px;
-    }
-  "))
-             )),
+                       # summary/proportion table
+                       strong(tableOutput("summaryTable"), align = "center")),
+                       column(6,
+                              strong("Discussion"),
+                              uiOutput("summaryData"))),
+                       br(),
+                       
+                       # full dataset table
+                       div(
+                         style = "border: 3px solid #000; 
+                                  border-radius: 2px;",
+                         h4(strong("Full Dataset"), align = "center"),
+                         strong(DTOutput("fullDataTable"))
+                       )
+             )
+    ),
     tabPanel(strong("Data Analysis"))
   )
 )
@@ -123,6 +129,14 @@ server <- function(input, output, session){
       )
     )
   })
+  output$fullDataTable <- renderDT({
+    datatable(CHD,
+              options = list(
+                pageLength = 10,     # number of rows per page
+                scrollX = TRUE       # horizontal scroll if table is wide
+              ))
+  })
+  
   output$summaryTable <- renderTable({
 
   var <- input$independent
@@ -155,8 +169,22 @@ server <- function(input, output, session){
     return(table_df)
   }
 })
+  output$summaryData <- renderUI({
+    var <- input$independent
+    
+    if (is.factor(CHD[[var]])) {
+      HTML(paste(
+        "This table shows the proportion of CHD cases vs No CHD for each level of",
+        var, ". Use these proportions to understand which categories have higher risk."
+      ))
+    } else {
+      HTML(paste(
+        "This table shows summary statistics (Mean, Median, SD, Min, Max) of",
+        var, "grouped by CHD status. Compare the values to see if the variable differs between No CHD and CHD groups."
+      ))
+    }
+  })
 }
-
 
 # Run the application
 shinyApp(ui = ui, server = server)
