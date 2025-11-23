@@ -1,42 +1,34 @@
 
 library(shiny)
+library(ggplot2)
 
+setwd("D:/Colleges/Brown University/BHDS 2010/Assignment4/BHDS-2010-Assignment-4")
 
-ui <- fluidPage(
-
-    # Application title
-    titlePanel("Old Faithful Geyser Data"),
-
-    # Sidebar with a slider input for number of bins 
-    sidebarLayout(
-        sidebarPanel(
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30)
-        ),
-
-        # Show a plot of the generated distribution
-        mainPanel(
-           plotOutput("distPlot")
-        )
-    )
-)
-
+ui <-fluidPage( 
+  # inputs 
+  ## text input <inputId1> 
+  textInput(...), 
+  ## select input <inputId2> 
+  selectInput(), 
+  ## text input <inputId3> 
+  # … 
+  #outputs 
+  ## data table 
+  DT::dataTableOutput("dataTable"), 
+  ## figure 
+  plotOutput("scatterPlot"), 
+) 
 # Define server logic required to draw a histogram
-server <- function(input, output) {
-
-    output$distPlot <- renderPlot({
-        # generate bins based on input$bins from ui.R
-        x    <- faithful[, 2]
-        bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-        # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white',
-             xlab = 'Waiting time to next eruption (in mins)',
-             main = 'Histogram of waiting times')
-    })
+server <- server <-function(input, output) { 
+  ## data management 
+  Data <-reactive({... 
+  }) 
+  ## output 1. Generate data table based on filtered data 
+  output$dataTable <-DT::renderDataTable({... 
+  }) 
+  ## output 2. Generate a plot 
+  output$scatterPlot <-renderPlot({... 
+  })
 }
 
 # Run the application 
