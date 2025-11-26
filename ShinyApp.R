@@ -94,9 +94,25 @@ ui <- fluidPage(
                        )
              )
     ),
-    tabPanel(strong("Data Analysis"))
+    tabPanel(strong("Data Analysis"),
+             br(),
+             h3(strong("Plot of Selected Variable vs CHD"), align = "center"),
+             
+             selectInput("analysisVar", "Select a Variable of Interest:",
+                         choices = c("Systolic Blood Pressure" = "sbp",
+                                     "Tobacco" = "tobacco",
+                                     "Low Density Lipoprotein Cholesterol" = "ldl",
+                                     "Measure of Body Fat" = "adiposity",
+                                     "Family History of Heart Disease" = "famhist",
+                                     "Obesity Index" = "obesity",
+                                     "Alcohol Consumption" = "alcohol",
+                                     "Age" = "age")),
+             
+             br(),
+             plotOutput("analysisPlot", height = "450px"))
+    )
   )
-)
+
 
 server <- function(input, output, session){
   # writing for data overview section 
@@ -169,6 +185,7 @@ server <- function(input, output, session){
     return(table_df)
   }
 })
+  
   output$summaryData <- renderUI({
     var <- input$independent
     
@@ -182,6 +199,45 @@ server <- function(input, output, session){
         "This table shows summary statistics (Mean, Median, SD, Min, Max) of",
         var, "grouped by CHD status. Compare the values to see if the variable differs between No CHD and CHD groups."
       ))
+    }
+  })
+  
+  plotVariableNames <- c(
+    sbp = "Systolic Blood Pressure",
+    tobacco = "Tobacco Use",
+    ldl = "Low Density Lipoprotein Cholesterol",
+    adiposity = "Measure of Body Fat",
+    famhist = "Family History of Heart Disease",
+    obesity = "Obesity Index",
+    alcohol = "Alcohol Consumption",
+    age = "Age"
+  )
+  
+  output$analysisPlot <- renderPlot({
+    var <- input$analysisVar
+    titleName <- plotVariableNames[[var]]   # allows for title to be written out
+    
+    if (is.numeric(CHD[[var]])) {
+      ggplot(CHD, aes(x = chd, y = .data[[var]], fill = chd)) +
+        geom_boxplot() +
+        theme_minimal() +
+        labs(
+          title = paste(titleName, "vs CHD"),
+          x = "CHD Status",
+          y = titleName,
+          fill = "CHD Status"      
+        )
+      
+    } else {
+      ggplot(CHD, aes(x = .data[[var]], fill = chd)) +
+        geom_bar(position = "fill") +
+        theme_minimal() +
+        labs(
+          title = paste(titleName, "vs CHD"),
+          x = titleName,
+          y = "Proportion",
+          fill = "CHD Status"     
+        )
     }
   })
 }
