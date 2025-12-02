@@ -36,6 +36,6 @@ To complete this assignment, we though it would be best if we split our variable
 
 12/1/2025 - Ibrahim created the code for the filtered data and the histogram.
 
-12/1/2025 - Ibrahim commented to tha code explaining the purpose of each part of the code.
+12/1/2025 - Ibrahim commented to the code explaining the purpose of each part of the code.
 
 12/01/2025 - Bryanna finished findings for each plot. (Bryanna Branch)
