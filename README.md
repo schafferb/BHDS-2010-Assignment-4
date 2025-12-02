@@ -26,3 +26,5 @@ Bryanna Schaffer and Ibrahim Elbasheer
 11/21/2025 - Bryanna finished Tab 2, which included raw data set and summary statistics for variables of interest. (Bryanna Branch)
 
 11/26/2025 - Bryanna uploaded plots to Tab 3 and is working on findings for each plot. (Bryanna Branch)
+
+12/01/2025 - Bryanna finished findings for each plot. (Bryanna Branch)
