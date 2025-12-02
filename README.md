@@ -22,6 +22,10 @@ To complete this assignment, we though it would be best if we split our variable
 
 11/13/2025 - Bryanna edited and saved the data as a csv file and uploaded to the main branch. 
 
+11/12/2025 - Roles (Variables) assigned for analysis. Bryanna cleaned the dataset.
+
+11/18/2025 - Bryanna created Shiny App and uploaded necessary information for Tab 1. (Bryanna Branch)
+
 11/14/2025 - Ibrahim accepted the invitation
 
 11/14/2025 - Ibrahim created a branch and downloaded the data and stored it in an Excel sheet.
