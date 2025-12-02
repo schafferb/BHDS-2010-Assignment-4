@@ -47,12 +47,14 @@ mainPanel(
       the sliders to see how different risk factors affect CHD prevalence."),
   plotOutput("chd_histogram"),
   
+  plotOutput("chd_boxplot"),
+  
   verbatimTextOutput("summary_stats"),
 
 )
 ))
 
-## Define server logic required to draw a histogram
+## Define server logic required to draw a histogram and box plot:
 
 server <- server <-function(input, output) { 
   output$slider <- renderUI({
@@ -74,7 +76,7 @@ server <- server <-function(input, output) {
     data %>% filter(.data[[input$variable]] >= input$range[1] & 
                       .data[[input$variable]] <= input$range[2])
   })
-  # Create the histogram:
+  # Visualization 1: create the histogram:
   
   # Storing the chd histogram as an output variable
   output$chd_histogram <- renderPlot({
@@ -89,6 +91,25 @@ server <- server <-function(input, output) {
            y = "Count") +
       theme_minimal() +
       scale_x_discrete(labels = c("No CHD", "CHD"))
+  })
+  
+  
+  # Visualization 2: box plot for "chd" variable with the selected variable:
+  
+  # Storing the chd box plot as an output variable
+  output$chd_boxplot <- renderPlot({
+    # selecting the required data, which is the filtered data.
+    req(filtered_data())
+    
+    ggplot(filtered_data(), aes(x = factor(chd), y = !!sym(input$variable),
+                                fill = factor(chd))) + geom_boxplot() + 
+      labs(
+        title = paste("CHD Distribution for", input$variable, "in range [", input$range[1], ",", input$range[2], "]"),
+        x = "Coronary Heart Disease (0 = No, 1 = Yes)",
+        y = paste(input$variable, "in range [", input$range[1],
+                  ",", input$range[2], "]")
+      ) + 
+      theme_minimal()
   })
  
 }
