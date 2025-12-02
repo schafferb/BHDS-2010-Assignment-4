@@ -159,7 +159,7 @@ server <- function(input, output, session){
   var <- input$independent
   df <- CHD
 
-  # If variable is categorical → show proportions of CHD
+  # If variable is categorical, it shows proportions of CHD
   if (is.factor(df[[var]])) {
 
     table_df <- df %>%
@@ -172,7 +172,7 @@ server <- function(input, output, session){
 
   } else {
 
-    # If numeric → show summary statistics by CHD group
+    # If numeric, it shows summary statistics by CHD group
     table_df <- df %>%
       group_by(chd) %>%
       summarise(
@@ -309,7 +309,7 @@ server <- function(input, output, session){
     var <- input$analysisVar
     desc <- plotDescriptions[[var]]  # pulls description for selected variable
     
-    p(desc)
+    p(desc) # paragraph from desc variable above
   })
 }
 
