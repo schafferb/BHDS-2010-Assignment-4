@@ -234,16 +234,69 @@ server <- function(input, output, session){
 
   # ANALYSIS DESCRIPTIONS
 
-  plotDescriptions <- list(
-    sbp = "Individuals with CHD tend to have higher systolic blood pressure...",
-    tobacco = "Tobacco consumption is higher among the CHD group...",
-    ldl = "LDL cholesterol levels tend to be higher among those with CHD...",
-    adiposity = "Body fat levels show mild differences between CHD groups...",
-    famhist = "Family history appears strongly associated with CHD...",
-    obesity = "Obesity index shows similar distributions across groups...",
-    alcohol = "Alcohol use varies only slightly between CHD groups...",
-    age = "Individuals with CHD tend to be older on average..."
-  )
+  plotDescriptions <- c(
+    sbp = "The plot shows the distribution of systolic blood pressure for males
+    with and without CHD. On average, males with CHD have higher systolic blood 
+    pressure than those without. This difference in means is approximately 8 mmHg. 
+    Blood pressure also appears to have greater variation in the CHD group, while 
+    outliers are present in both groups, with a higher number in males without CHD. 
+    These observations suggest that systolic blood pressure is associated with CHD, 
+    but individual variability exists, and high or low blood pressure can occur 
+    even in males without CHD. Statistical testing will need to be conducted to 
+    examine this association.",
+    tobacco = "This plot shows cumulative tobacco use among individuals with and 
+    without CHD. On average, males with CHD have higher cumulative tobacco use 
+    than those without. This difference in means is approximately 3 kg Cumulative 
+    tobacco use also appears to have greater variation in the CHD group, while 
+    outliers are present in both groups. These observation suggest that cumulative 
+    tobacco use is associated with CHD, but individual variability exists. 
+    Statistical testing will need to be conducted to examine this association.",
+    ldl = "This plot compares low-density lipoprotein cholesterol levels by CHD 
+    status. Here, we see that individuals with CHD have a greater low-density 
+    lipoprotein cholesterol levels compared to its counterpart. The difference 
+    in  means is relatively small of approximately 1 mg/dL. The variability of 
+    the two groups appears to be roughly the same, however, the CHD group has 
+    slightly greater variation. With these observation, a statistical test should 
+    be performed to determine if there is an association between low density 
+    lipoprotein cholesterol levels and CHD.",
+    adiposity = "This plot shows body fat distribution in relation to CHD. For 
+    the CHD group, we have a slightly greater median compared to the no CHD group. 
+    The mean measure of body fat for the CHD group is approximately 28.12, and for 
+    the No CHD group it is approximately 23.97. This has an approximate mean 
+    difference of 5 units. The variable between the two groups appears to be very 
+    similar. Therefore, a statistical test should be performed to determine if 
+    there is an association between body fat and CHD.",
+    famhist = "This bar plot shows the proportion of CHD cases among those with 
+    or without a family history of heart disease. We see an increase in about 25% 
+    of cases in CHD when there is a family history of heart disease. On the other 
+    hand, we see a decrease in about 25% of No CHD cases when there is a family 
+    history of heart disease. From this plot, it appears there is an association 
+    between family history of heart disease and CHD status, meaning individuals 
+    who have a family history of heart disease have an increased chance of having 
+    CHD. Statistical tests should be performed to determine if there is an association 
+    between family history of heart disease and CHD.",
+    obesity = "This plot compares obesity levels between CHD and No CHD groups. 
+    The distribution appears to be fairly similar with the median obesity index 
+    values super close to each other. The mean obesity index for the CHD group is 
+    approximately 26.62, while for the No CHD group it is approximately 25.74. 
+    There does not appear to be an association between obesity index and CHD status, 
+    however, statistical testing should be performed in order to draw conclusions.",
+    alcohol = "This plot displays alcohol consumption patterns by CHD status. The 
+    distribution appears to be fairly similar with the median alcohol consumption 
+    amount super close to each other. The mean alcohol consumption for the CHD 
+    group is approximately 19.15, while for the No CHD group it is approximately 
+    15.93. The variation between the groups appear to be equal. Due to these 
+    examinations, statistical testing should be performed in order to draw 
+    conclusions on whether or not there is an association between alcohol 
+    consumption and CHD status. ",
+    age = "This plot compares the age distribution of individuals with and without 
+    CHD. We see that the median age for CHD does not overlap with the IQR range of 
+    No CHD. Furthermore, the mean age of individuals with CHD is approximately 50, 
+    while for no CHD the mean age is approximately 39. There appears to be more 
+    variation in the No CHD group. These observation suggest that age is associated 
+    with CHD, but individual variability exist. Statistical testing will need to 
+    be conducted to examine this association.")
+
   
   output$analysisPlotDescription <- renderUI({
     p(plotDescriptions[[input$analysisVar]])
