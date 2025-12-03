@@ -62,10 +62,7 @@ mainPanel(
              h3(strong("Plot description in full range:")),
              uiOutput("analysisPlotDescription"))
     ),
-  
-  verbatimTextOutput("summary_stats"),
-
-)
+  )
 ))
 
 ## Define server logic required to draw a histogram and box plot:
