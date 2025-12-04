@@ -19,27 +19,36 @@ ui <-fluidPage(
   # the app title 
   titlePanel("SA Heart Disease Data Explorer"),
   # Side bar contents
+
   sidebarLayout(
     sidebarPanel( width = 4,
                   # Drop list of all variables, one variable is selected to be
                   # used in the slide bar for data filtering. 
-      selectInput("variable", 
-                  "Select a variable:",
-               choices = c("Systolic Blood Pressure"= "sbp",
-                           "Cumulative Tobacco (kg)"="tobacco",
-                           "Low Density Lipoprotein Cholesterol"="ldl",
-                           "Adiposity"="adiposity",
-                           "Family History of Heart Disease"="famhist",
-                           "Obesity" = "obesity", 
-                           "Alcohol" = "alcohol",
-                           "Age" = "age"),
-               selected =  "age", # select the initial variable for the drop list
-      ),
+                  wellPanel(
+                    h3("About This App:"),
+                    p("This shiny app uses a dataset collected from South Africa. It is Heart
+    The disease dataset is collected to explore risk factors for coronary 
+    heart disease. Select the variable from the drop list, and adjust the 
+    sliders to see how different risk factor ranges affect CHD prevalence.")
+                  ),
+                  selectInput("variable", 
+                              "Select a variable:",
+                              choices = c("Systolic Blood Pressure"= "sbp",
+                                          "Cumulative Tobacco (kg)"="tobacco",
+                                          "Low Density Lipoprotein Cholesterol"="ldl",
+                                          "Adiposity"="adiposity",
+                                          "Family History of Heart Disease"="famhist",
+                                          "Obesity" = "obesity", 
+                                          "Alcohol" = "alcohol",
+                                          "Age" = "age"),
+                              selected =  "age", # select the initial variable for the drop list
+                  ),
+      br(),
       uiOutput("slider")
 ),
 mainPanel(
   # App definition:
-  h3(strong("About This App:")),
+  h3(strong("About the data:")),
     p("This dataset originates from  retrospective study of adult males living in a 
       heart-diseases high-risk region of the Western Cape, South Africa. The sample 
       includes individuals with diagnosed coronary heart disease (CHD) and a larger 
@@ -51,8 +60,12 @@ mainPanel(
   
   tabsetPanel(
     tabPanel(p("Histogram:"),
-             h3(strong("The histogram according to the selected variable:")),
-             plotOutput("chd_histogram")),
+             h3(strong("The histogram according to the selected variable:")
+                ),
+             br(),
+             plotOutput("chd_histogram"),
+             br(),
+             verbatimTextOutput("summary_stats")),
              
              
     tabPanel(p("Box Plot"),
@@ -192,6 +205,22 @@ server <- server <-function(input, output) {
     desc <- plotDescriptions[[var]]  # pulls description for selected variable
     
     p(desc) # paragraph from desc variable above
+  })
+  
+  # Summary statistics for CHD
+  output$summary_stats <- renderPrint({
+    req(filtered_data())
+    filtered <- filtered_data()
+    cat("SUMMARY STATISTICS FOR CHD\n")
+    cat("==========================\n")
+    cat("Total observations:", nrow(filtered), "\n")
+    cat("CHD cases:", sum(filtered$chd), "\n")
+    cat("Non-CHD cases:", sum(!filtered$chd), "\n")
+    cat("CHD prevalence:", round(mean(filtered$chd) * 100, 1), "%\n")
+    cat("Detailed breakdown:(0 = No CHD , 1 = CHD)")
+    print(table(filtered$chd))
+    cat("Proportions:(0 = No CHD , 1 = CHD)")
+    print(round(prop.table(table(filtered$chd))* 100, 1))
   })
  
 }
