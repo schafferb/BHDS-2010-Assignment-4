@@ -40,5 +40,9 @@ To complete this assignment, we though it would be best if we split our variable
 
 12/01/2025 - Bryanna finished findings for each plot. (Bryanna Branch)
 
-12/2/2025 - Ibrahim add the box plot from Bryanna's work to the shiny app.
+12/2/2025 - Bryanna and Ibrahim discuss how to proceed with merging apps. It is decided to add the histograms to the app in the Bryanna branch.
+
+12/3/2025 - Bryanna merges the apps. 
+
+12/
 
