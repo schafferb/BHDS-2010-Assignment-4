@@ -7,7 +7,31 @@ Bryanna Schaffer and Ibrahim Elbasheer
 # Assignment Description
 
 # Dataset
+The original name of the dataset is SAheart. This dataset originates from a retrospective study of adult males living in a heart-disease high-risk region of the Western Cape, South Africa. The sample includes individuals with diagnosed coronary heart disease (CHD) and a larger group of individuals without CHD, along with various demographic and physiological factors. These data form part of a broader study described in Roussaeuw et al. (1983) in the South African Medical Journal. Several physiological measurements were recorded after treatment, which is important to consider when interpreting predictors such as systolic blood pressure in relation to CHD status.
 
+The dataset contains 10 variables:
+
+sbp: systolic blood pressure
+
+tobacco: cumulative tobacco use (kg)
+
+ldl: low-density lipoprotein cholesterol
+
+adiposity: measure of body fat
+
+famhist: family history of heart disease (Present/Absent)
+
+typea: type-A behavior
+
+obesity: obesity score or index
+
+alcohol: current alcohol consumption (liters per year)
+
+age: age at onset
+
+chd: coronary heart disease (No CHD/CHD)
+
+All variables were used except typea. All variables are numeric except famhist and chd, which are categorical. Variable definitions are provided on the data source website.
 # Roles and Responsibilities
 To complete this assignment, we though it would be best if we split our variables of interest between the two of us. Bryanna is responsible for sbp, tobacco, ldl, and famhist. Ibrahim is responsible for typea, obesity, alcohol, and age. We both will perform data analysis and write a results section for each variable (total of 4 each)!
 
