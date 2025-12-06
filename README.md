@@ -68,5 +68,7 @@ To complete this assignment, we though it would be best if we split our variable
 
 12/3/2025 - Bryanna merges the apps. 
 
-12/
+12/4/2025 - Ibrahim added the code of the summary to the app.
+
+12/4/2025 - Ibrahim added a read-me draft to his branch.
 
