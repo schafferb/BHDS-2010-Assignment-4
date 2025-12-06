@@ -15,9 +15,11 @@ This assignment provides another opportunity to practice collaborating via Githu
 
 # Roles and Responsibilities
 
-Ibrahim: Visualization 1 (Histogram) + README documentation
+Ibrahim: Visualization 1 (Histogram) with Summary Statistics/Analysis + README 
+documentation
 
-Bryanna: Summary Statistics + Visualization 2 (Boxplots/Bar plots) + README documentation
+Bryanna: Summary Statistics + Visualization 2 (Boxplots/Bar plots) with Analysis + 
+README documentation
 
 # Dataset
 
@@ -105,34 +107,48 @@ The final Shiny application presents our findings through three interactive comp
 
 11/10/2025 - Dataset picked out and agreed uponed by Bryanna and Ibrahim
 
-11/13/2025 - Bryanna edited and saved the data as a csv file and uploaded to the main branch.
+11/13/2025 - Bryanna edited and saved the data as a csv file and uploaded to the 
+main branch.
 
 11/12/2025 - Roles (Variables) assigned for analysis. Bryanna cleaned the dataset.
 
-11/18/2025 - Bryanna created Shiny App and uploaded necessary information for Tab 1. (Bryanna Branch)
+11/18/2025 - Bryanna created Shiny App and uploaded necessary information for Tab 
+1. (Bryanna Branch)
 
 11/14/2025 - Ibrahim accepted the invitation
 
-11/14/2025 - Ibrahim created a branch and downloaded the data and stored it in an Excel sheet.
+11/14/2025 - Ibrahim created a branch and downloaded the data and stored it in an 
+Excel sheet.
 
-11/21/2025 - Bryanna finished Tab 2, which included raw data set and summary statistics for variables of interest. (Bryanna Branch)
+11/21/2025 - Bryanna finished Tab 2, which included raw data set and summary 
+statistics for variables of interest. (Bryanna Branch)
 
-11/26/2025 - Bryanna uploaded plots to Tab 3 and is working on findings for each plot. (Bryanna Branch)
+11/26/2025 - Bryanna uploaded plots to Tab 3 and is working on findings for each 
+plot. (Bryanna Branch)
 
 12/1/2025 - Ibrahim created the code for the filtered data and the histogram.
 
-12/1/2025 - Ibrahim commented to the code explaining the purpose of each part of the code.
+12/1/2025 - Ibrahim commented to the code explaining the purpose of each part of 
+the code.
 
 12/01/2025 - Bryanna finished findings for each plot. (Bryanna Branch)
 
-12/2/2025 - Bryanna and Ibrahim discuss how to proceed with merging apps. It is decided to add the histograms to the app in the Bryanna branch.
+12/2/2025 - Bryanna and Ibrahim discuss how to proceed with merging apps. It is 
+decided to add the histograms to the app in the Bryanna branch.
 
 12/3/2025 - Bryanna merges the apps.
 
-12/4/2025 - Ibrahim puts his write up in his branch as a word document.
+12/4/2025 - Ibrahim puts his write up in his branch as a word document. He also 
+added summary code to his app.
 
-12/4/2025 - Bryanna takes Ibrahim's write up and adds it to the README file.
+12/4/2025 - Bryanna takes Ibrahim's write up and adds it to the README file. She 
+also adds Ibrahim's summary code to the main app.
 
 12/5/2025 - Bryanna adds her write up to the README file. 
 
-12/5/2025 - Bryanna sends published app and README file to Ibrahim for approval to submit.
+12/5/2025 - Bryanna sends published app and README file to Ibrahim for approval 
+to submit.
+
+12/5/2025 - Ibrahim approves the README file and app for submission.
+
+12/5/2025 - Bryanna submits the assignment. 
