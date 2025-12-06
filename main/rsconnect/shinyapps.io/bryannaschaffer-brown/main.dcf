@@ -1,0 +1,12 @@
+name: main
+title: main
+username: bryannaschaffer-brown
+account: bryannaschaffer-brown
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 16233858
+bundleId: 11281940
+url: https://bryannaschaffer-brown.shinyapps.io/main/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE
