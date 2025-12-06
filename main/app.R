@@ -15,15 +15,17 @@ CHD <- read.table(
   sep = ",", head = TRUE, row.names = 1
 )
 
+# filtering the data
 CHD <- CHD %>% 
   mutate(chd = factor(chd, levels = c(0, 1), labels = c("No CHD", "CHD")))
 CHD$famhist <- as.factor(CHD$famhist)
 
-# UI
+# UI portion of app
 
 ui <- fluidPage(
   br(),
-  fluidRow(titlePanel(strong("Risk Factors Associated with CHD Diagnosis in High-Risk South African Men")),
+  fluidRow(titlePanel(strong("Risk Factors Associated with CHD Diagnosis in 
+                             High-Risk South African Men")),
            align = "center"),
   fluidRow(h4("Published by: Bryanna Schaffer and Ibrahim Elbasheer"), align = "center"),
   
@@ -31,7 +33,7 @@ ui <- fluidPage(
     
 # 1. DATA OVERVIEW TAB - Bryanna/Ibrahim
     
-    tabPanel(strong("Data Overview"),
+    tabPanel(strong("Data Overview"), # tab 1
              br(),
              mainPanel(
                width = 12,
@@ -48,17 +50,19 @@ ui <- fluidPage(
     
 # 2. DATA EXPLORATION TAB - Bryanna
 
-    tabPanel(strong("Data Exploration"),
+    tabPanel(strong("Data Exploration"), # tab 2
              br(),
              mainPanel(
                width = 12,
-               h3(strong("Coronary Heart Disease Data Exploration"), align = "center"),
+               h3(strong("Coronary Heart Disease Data Exploration"), 
+                  align = "center"),
                textOutput("howtodata"),
                br(),
                
                fluidRow(
                  column(6,
-                        selectInput("independent", strong("Select a Variable of Interest"),
+                        selectInput("independent", strong("Select a Variable of 
+                                                          Interest"),
                                     choices = c(
                                       "Systolic Blood Pressure" = "sbp",
                                       "Tobacco" = "tobacco",
@@ -93,7 +97,7 @@ ui <- fluidPage(
 
 # 3. HISTOGRAM WITH SLIDER TAB - Ibrahim
 
-    tabPanel(strong("Data Exploration - Histograms"),
+    tabPanel(strong("Data Exploration - Histograms"), # tab 3
              
              sidebarLayout(
                sidebarPanel(
@@ -130,7 +134,7 @@ ui <- fluidPage(
  
 # 4. DATA ANALYSIS TAB WITH SUMMARY - Bryanna
 
-  tabPanel(strong("Data Analysis - Boxplot/Bar Plots"),
+  tabPanel(strong("Data Analysis - Boxplot/Bar Plots"), # tab 4
            br(),
            h3(strong("Variable of Interest vs CHD"), align = "center"),
            
@@ -147,7 +151,7 @@ ui <- fluidPage(
                        )),
            
            br(),
-           plotOutput("analysisPlot", height = "450px"),
+           plotOutput("analysisPlot"),
            uiOutput("analysisPlotDescription")
   )
   )
@@ -157,10 +161,11 @@ ui <- fluidPage(
 
 server <- function(input, output, session){
   
-# DATA OVERVIEW TEXT
+# DATA OVERVIEW SECTION TEXT
 
   output$question <- renderText({
-    "Which risk factors are most strongly associated with CHD diagnosis in high-risk South African men?"
+    "Which risk factors are most strongly associated with CHD diagnosis in 
+    high-risk South African men?"
   }) # research question
   
   output$overview <- renderText({
@@ -170,7 +175,8 @@ server <- function(input, output, session){
     group of demographic factors. These data form part of a broader study described 
     in Roussaeuw et al. (1983) in the South African Medical Journal. Several 
     physiological measurements were recorded after treatment. This is an important 
-    consideration when interpreting predictors such as systolic blood pressure in relation to CHD status"
+    consideration when interpreting predictors such as systolic blood pressure in 
+    relation to CHD status"
   }) # about the data
   
   output$variables <- renderUI({
@@ -205,13 +211,13 @@ server <- function(input, output, session){
   output$summaryTable <- renderTable({
     var <- input$independent
     
-    if (is.factor(CHD[[var]])) {
+    if (is.factor(CHD[[var]])) { # for categorical variables
       CHD %>%
         group_by(.data[[var]], chd) %>%
         summarise(n = n(), .groups = "drop_last") %>%
         mutate(proportion = round(n / sum(n), 3))
       
-    } else {
+    } else { # for numerical variables
       CHD %>%
         group_by(chd) %>%
         summarise(
@@ -227,10 +233,12 @@ server <- function(input, output, session){
   output$summaryData <- renderUI({
     var <- input$independent
     
-    if (is.factor(CHD[[var]])) {
-      HTML(paste("This table shows the proportion of CHD vs No CHD for each category of", var_names[[var]]))
-    } else {
-      HTML(paste("This table shows summary statistics of", var_names[[var]], "grouped by CHD status."))
+    if (is.factor(CHD[[var]])) { # for categorical variables
+      HTML(paste("This table shows the proportion of CHD vs No CHD for each 
+                 category of", var_names[[var]]))
+    } else { # for numerical variables
+      HTML(paste("This table shows summary statistics of", var_names[[var]], 
+                 "grouped by CHD status."))
     } # title of summary table based on selection of variable
   })
   
